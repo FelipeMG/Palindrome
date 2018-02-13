@@ -6,14 +6,17 @@ public final class Sentence{
         throw new AssertionError("This class should not be instantiated");
     }
 
-    public static boolean isPalindrome(String sentence){
-        String readableSentence = removeSpecialCharacters(sentence);
-        String readableLowerCaseSentence = readableSentence.toLowerCase();
-        return isPalindromeStringWithoutSpecialCharacters(readableLowerCaseSentence);
+    public static boolean isPalindrome(String sentence) {
+        if (removeSpecialCharacters(sentence)) {
+            String readableLowerCaseSentence = readableSentence.toLowerCase();
+            return isPalindromeStringWithoutSpecialCharacters(readableLowerCaseSentence);
+        } else {
+            return false;
+        }
     }
 
-    private static String removeSpecialCharacters(String sentence) {
-        return sentence.replaceAll("[ !¡,]", "");
+    private static boolean removeSpecialCharacters(String sentence) {
+        return sentence.chars().allMatch(b -> Character.isLetter(b)) ? true : false;
     }
 
     private static boolean isPalindromeStringWithoutSpecialCharacters(String sentence) {
